@@ -93,7 +93,6 @@ $(function(){
         // To avoid XSS (not that it would be harmful in this particular app),
         // we use `jQuery.text` to set the contents of the todo item.
         setContent: function() {
-            this.model.id = this.model.get('login');
             this.$('.userLogin').text(this.model.get('login'));
             this.$('.userFirstName').text(this.model.get('firstName'));
             this.$('.userLastName').text(this.model.get('lastName'));
