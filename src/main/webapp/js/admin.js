@@ -160,16 +160,10 @@ function collectFormData(fields) {
 }
 
 function addRow(response) {
-    var color;
-    if (response.role === 'ROLE_ADMIN') {
-        color = '#663926';
-    } else {
-        color = '#48663C';
-    }
     var date = new Date(response.birthDate);
     var birthDate = ISODateString(date);
     $('#userstable').append(
-        '<tr id="' + response.login + '" style="background: ' + color +'"'
+        '<tr id="' + response.login
             + '">' + '<td>' + response.login
             + '</td>' + '<td>' + response.firstName + '</td>'
             + '<td>' + response.lastName + '</td>' + '<td>'
@@ -182,16 +176,10 @@ function addRow(response) {
 }
 
 function editRow(response) {
-    var color;
-    if (response.role === 'ROLE_ADMIN') {
-        color = '#663926';
-    } else {
-        color = '#48663C';
-    }
     var date = new Date(response.birthDate);
     var birthDate = ISODateString(date);
     $('#' + response.login).replaceWith(
-        '<tr id="' + response.login + '" style="background: ' + color + '"'
+        '<tr id="' + response.login
             + '">' + '<td>' + response.login
             + '</td>' + '<td>' + response.firstName + '</td>'
             + '<td>' + response.lastName + '</td>' + '<td>'
