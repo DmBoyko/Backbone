@@ -46,7 +46,7 @@ $(function () {
 
     // The collection of todos is backed by *localStorage* instead of a remote
     // server.
-    window.TodoList = Backbone.Collection.extend({
+    window.UserList = Backbone.Collection.extend({
 
         // Reference to this collection's model.
         model: User,
@@ -56,14 +56,13 @@ $(function () {
     });
 
     // Create our global collection of **Users**.
-    window.Users = new TodoList;
+    window.Users = new UserList;
 
     // User Item View
     // --------------
 
     // The DOM element for a user item...
-    window.TodoView = Backbone.View.extend({
-
+    window.UserView = Backbone.View.extend({
         //... is a list tag.
         tagName: "tr",
 
@@ -80,7 +79,7 @@ $(function () {
         initialize: function () {
             this.model.bind('change', this.render, this);
             this.model.on('destroy', this.remove, this);
-//            this.model.on('edit', this.edit, this);
+            this.model.on('edit', this.edit, this);
         },
 
         // Re-render the contents of the user item.
@@ -101,6 +100,10 @@ $(function () {
             this.$('.userRole').text(role.name);
             this.$('.userBirthDate').text(this.model.get('birthDate'));
 //            this.$('.editUser').attr("onclick", "editFormShow('" + this.model.get('login') + "')");
+        },
+
+        edit: function() {
+           editFormShow(this.model.get("login"));
         },
 
         // Remove this view from the DOM.
@@ -141,7 +144,7 @@ $(function () {
         },
 
         addOne: function (user) {
-            var view = new TodoView({model: user});
+            var view = new UserView({model: user});
             this.$("#user-list").append(view.render().el);
         },
 

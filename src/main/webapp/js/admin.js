@@ -34,7 +34,7 @@ function editUser(e) {
                     $controlGroup.find('.help-inline').html(item.message);
                 }
             } else {
-                editRow(response);
+                Users.fetch();
                 adminFormShow();
             }
         },
@@ -73,7 +73,7 @@ function addUser(e) {
                     $controlGroup.find('.help-inline').html(item.message);
                 }
             } else {
-                addRow(response);
+                Users.fetch();
                 adminFormShow();
             }
         },
@@ -83,15 +83,6 @@ function addUser(e) {
     });
     e.preventDefault();
     return false;
-}
-
-function ISODateString(d){
-    function pad(n){
-        return n<10 ? '0'+n : n
-    }
-    return pad(d.getUTCDate())+'.'
-        + pad(d.getUTCMonth()+1)+'.'
-        + d.getUTCFullYear()
 }
 
 function addFormShow() {
@@ -130,25 +121,6 @@ function adminFormShow() {
     $('#adminForm').show(1500);
 }
 
-function deleteUser(login) {
-    if (confirm("Are you sure ?")) {
-        $.ajax({
-            type: "post",
-            url: "delete",
-            cache: false,
-            clearForm: true,
-            data: 'login=' + login,
-            success: function (resp) {
-                $('#' + resp).hide(1000, function () {
-                    $(this).remove();
-                });
-            },
-            error: function () {
-                alert('Error while request..');
-            }
-        })
-    }
-}
 
 function collectFormData(fields) {
     var data = {};
@@ -157,36 +129,4 @@ function collectFormData(fields) {
         data[$item.attr('name')] = $item.val();
     }
     return data;
-}
-
-function addRow(response) {
-    var date = new Date(response.birthDate);
-    var birthDate = ISODateString(date);
-    $('#userstable').append(
-        '<tr id="' + response.login
-            + '">' + '<td>' + response.login
-            + '</td>' + '<td>' + response.firstName + '</td>'
-            + '<td>' + response.lastName + '</td>' + '<td>'
-            + response.email + '</td>' + '<td>' + response.role + '</td>'
-            + '<td>' + birthDate + '</td>' + '<td>' + '<div>'
-            + '<a href="#" onclick="editFormShow(\'' + response.login
-            + '\')">Edit </a>'
-            + '<a href="#" onclick="deleteUser(\'' + response.login
-            + '\')">Delete</a>' + '</div></td></tr>');
-}
-
-function editRow(response) {
-    var date = new Date(response.birthDate);
-    var birthDate = ISODateString(date);
-    $('#' + response.login).replaceWith(
-        '<tr id="' + response.login
-            + '">' + '<td>' + response.login
-            + '</td>' + '<td>' + response.firstName + '</td>'
-            + '<td>' + response.lastName + '</td>' + '<td>'
-            + response.email + '</td>' + '<td>' + response.role + '</td>'
-            + '<td>' + birthDate + '</td>' + '<td>' + '<div>'
-            + '<a href="#" onclick="editFormShow(\'' + response.login
-            + '\')">Edit </a>'
-            + '<a href="#" onclick="deleteUser(\'' + response.login
-            + '\')">Delete</a>' + '</div></td></tr>');
 }
