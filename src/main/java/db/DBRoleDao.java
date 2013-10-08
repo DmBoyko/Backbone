@@ -1,5 +1,6 @@
 package db;
 
+import domain.Role;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

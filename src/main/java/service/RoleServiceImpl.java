@@ -2,7 +2,7 @@ package service;
 
 import db.DBSystemException;
 import db.NotUniqueRoleNameException;
-import db.Role;
+import domain.Role;
 import db.RoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

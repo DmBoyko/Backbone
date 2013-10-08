@@ -1,6 +1,8 @@
 package web.controller;
 
 import db.*;
+import domain.Role;
+import domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,13 @@ public class HomeController {
     public String adminPage(Model model) {
         model.addAttribute("users", userService.findAll());
         return "admin";
+    }
+
+    @RequestMapping(value = "allUsers")
+    public final
+    @ResponseBody
+    List<User> findAll() {
+        return userService.findAll();
     }
 
     @RequestMapping(value = "hiUser")

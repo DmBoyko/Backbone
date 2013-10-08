@@ -1,6 +1,7 @@
 package service;
 
 import db.*;
+import domain.User;
 
 import java.util.List;
 

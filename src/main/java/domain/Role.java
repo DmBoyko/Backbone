@@ -1,7 +1,7 @@
-package db;
+package domain;
 
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,6 +15,7 @@ import java.util.Set;
 
 @Table(name = "ROLE", schema = "PUBLIC")
 @Entity
+@JsonIgnoreProperties(value = "users")
 public class Role {
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")

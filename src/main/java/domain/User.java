@@ -1,4 +1,6 @@
-package db;
+package domain;
+
+import domain.Role;
 
 import javax.persistence.*;
 import java.sql.Date;

@@ -1,4 +1,6 @@
 import db.*;
+import domain.Role;
+import domain.User;
 import org.dbunit.Assertion;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;

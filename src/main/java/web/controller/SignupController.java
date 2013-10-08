@@ -1,6 +1,7 @@
 package web.controller;
 
 import db.*;
+import domain.User;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.apache.commons.logging.Log;

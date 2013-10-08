@@ -1,6 +1,8 @@
 package db;
 
 
+import domain.Role;
+
 public interface RoleDao {
     public void create(Role role) throws NotUniqueRoleNameException, DBSystemException;
 

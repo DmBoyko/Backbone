@@ -2,8 +2,7 @@ package service;
 
 import db.DBSystemException;
 import db.NotUniqueRoleNameException;
-import db.Role;
-import org.springframework.context.annotation.ComponentScan;
+import domain.Role;
 
 /**
  * Created with IntelliJ IDEA.

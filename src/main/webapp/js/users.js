@@ -51,8 +51,7 @@ $(function () {
         // Reference to this collection's model.
         model: User,
 
-        url: "http://10.11.20.69:8080/RESTfull_Server/serviceUsers/users"
-
+        url: "allUsers"
     });
 
     // Create our global collection of **Users**.

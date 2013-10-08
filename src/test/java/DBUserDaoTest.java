@@ -1,4 +1,6 @@
 import db.*;
+import domain.Role;
+import domain.User;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;

@@ -46,8 +46,8 @@
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>db.Role</value>
-                <value>db.User</value>
+                <value>domain.Role</value>
+                <value>domain.User</value>
             </list>
         </property>
         <property name="hibernateProperties">

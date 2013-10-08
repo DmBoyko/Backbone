@@ -1,6 +1,6 @@
 package web.validator;
 
-import db.User;
+import domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.Email;
