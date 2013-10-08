@@ -32,4 +32,8 @@
     <td class="userEmail"/>
     <td class="userRole"/>
     <td class="userBirthDate"/>
+    <td>
+        <a class="editUser" href="#">Edit</a>
+        <a class="deleteUser" href="#">Delete</a>
+    </td>
 </script>
