@@ -98,7 +98,6 @@ $(function () {
             var role = this.model.get('role');
             this.$('.userRole').text(role.name);
             this.$('.userBirthDate').text(this.model.get('birthDate'));
-//            this.$('.editUser').attr("onclick", "editFormShow('" + this.model.get('login') + "')");
         },
 
         edit: function() {
