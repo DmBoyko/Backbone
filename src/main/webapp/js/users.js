@@ -6,7 +6,7 @@ _.templateSettings = {
     escape: /\<\@\-(.+?)\@\>/gim
 };
 
-$(function(){
+$(function () {
 
     // User Model
     // ----------
@@ -27,7 +27,7 @@ $(function(){
         },
 
         // Ensure that each todo created has `content`.
-        initialize: function() {
+        initialize: function () {
             if (!this.get("id")) {
                 this.set({"id": this.defaults.id});
                 this.set({"login": this.defaults.login});
@@ -65,26 +65,26 @@ $(function(){
     window.TodoView = Backbone.View.extend({
 
         //... is a list tag.
-        tagName:  "tr",
+        tagName: "tr",
 
         // Cache the template function for a single item.
         template: _.template($('#item-template').html()),
 
         // The DOM events specific to an item.
         events: {
-            "click .check"              : "toggleDone",
-            "dblclick div.todo-content" : "edit",
-            "click span.todo-destroy"   : "clear",
-            "keypress .todo-input"      : "updateOnEnter"
+            "click .check": "toggleDone",
+            "click .edit": "edit",
+            "click .destroy": "destroy"
         },
 
-        initialize: function() {
+        initialize: function () {
             this.model.bind('change', this.render, this);
-            this.model.bind('destroy', this.remove, this);
+            this.model.on('destroy', this.remove, this);
+//            this.model.on('edit', this.edit, this);
         },
 
         // Re-render the contents of the user item.
-        render: function() {
+        render: function () {
             $(this.el).html(this.template(this.model.toJSON()));
             this.setContent();
             return this;
@@ -92,7 +92,7 @@ $(function(){
 
         // To avoid XSS (not that it would be harmful in this particular app),
         // we use `jQuery.text` to set the contents of the todo item.
-        setContent: function() {
+        setContent: function () {
             this.$('.userLogin').text(this.model.get('login'));
             this.$('.userFirstName').text(this.model.get('firstName'));
             this.$('.userLastName').text(this.model.get('lastName'));
@@ -100,17 +100,25 @@ $(function(){
             var role = this.model.get('role');
             this.$('.userRole').text(role.name);
             this.$('.userBirthDate').text(this.model.get('birthDate'));
-            this.$('.editUser').attr("onclick","editFormShow('" + this.model.get('login') + "')");
-            this.$('.deleteUser').attr("onclick","deleteUser('" + this.model.get('login') + "')");
+//            this.$('.editUser').attr("onclick", "editFormShow('" + this.model.get('login') + "')");
         },
 
         // Remove this view from the DOM.
-        remove: function() {
-            $(this.el).remove();
+        remove: function () {
+            if (confirm("Are you sure ?")) {
+                Backbone.ajax({
+                    type: "post",
+                    url: "delete",
+                    cache: false,
+                    clearForm: true,
+                    data: 'login=' + this.model.get('login')
+                })
+                $(this.el).remove();
+            }
         },
 
         // Remove the item, destroy the model.
-        clear: function() {
+        destroy: function () {
             this.model.destroy();
         }
 
@@ -123,19 +131,21 @@ $(function(){
 
         el: $("#userapp"),
 
-        initialize: function() {
+        initialize: function () {
+            _.bindAll(this, 'addOne', 'addAll', 'render');
+
             Users.bind('reset', this.addAll, this);
-            Users.bind('add',   this.addOne, this);
-            Users.bind('all',   this.render, this);
+            Users.bind('add', this.addOne, this);
+            Users.bind('all', this.render, this);
             Users.fetch();
         },
 
-        addOne: function(user) {
+        addOne: function (user) {
             var view = new TodoView({model: user});
             this.$("#user-list").append(view.render().el);
         },
 
-        addAll: function() {
+        addAll: function () {
             Users.each(this.addOne);
         }
     });

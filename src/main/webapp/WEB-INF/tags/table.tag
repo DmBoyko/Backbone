@@ -33,7 +33,8 @@
     <td class="userRole"/>
     <td class="userBirthDate"/>
     <td>
-        <a class="editUser" href="#" onclick="#">Edit</a>
-        <a class="deleteUser" href="#" onclick="#">Delete</a>
+        <%--<a class="editUser" href="#" onclick="#">Edit</a>--%>
+        <button class="edit">edit</button>
+        <button class="destroy">delete</button>
     </td>
 </script>
